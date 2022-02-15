@@ -25,7 +25,7 @@ func main() {
 		fmt.Print("> ")
 		fmt.Scanf("%s", &com)
 
-		comm , err = strconv.Atoi(com)
+		comm, err = strconv.Atoi(com)
 		if err != nil {
 			fmt.Println("AN ERROR OCCURRE WHILE READING INPUT")
 			comm = -1
@@ -55,7 +55,8 @@ func main() {
 			var a, b string
 			fmt.Print("Insert the start and dest names separated by space: ")
 			fmt.Scanf("%s %s", &a, &b)
-			fmt.Printf("Distance: %d\n", g.Dijkstra(a, b))
+			cost, path := g.Dijkstra(a, b)
+			fmt.Printf("Path: %s\nCost: %d\n\n", path, cost)
 		}
 	}
 }
