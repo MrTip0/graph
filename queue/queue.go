@@ -31,9 +31,9 @@ func (q *Queue) Len() int {
 }
 
 func (q Queue) Contains(val interface{}) bool {
-	for	q.Len() > 0 {
-		v := q.Dequeue()
-		if v == val {
+	l := q.v
+	for e := l.Front(); e != nil; e = e.Next() {
+		if e.Value == val {
 			return true
 		}
 	}
