@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/MrTip0/graph/graph"
+	"github.com/MrTip0/graph/graphs"
 )
 
 func main() {
 	comm := 1
-	g := graph.New()
+	g := graphs.New()
 
 	for comm != 0 {
 		fmt.Println("0 - Exit")
