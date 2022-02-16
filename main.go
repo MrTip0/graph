@@ -27,36 +27,81 @@ func main() {
 
 		comm, err = strconv.Atoi(com)
 		if err != nil {
-			fmt.Println("AN ERROR OCCURRE WHILE READING INPUT")
+			fmt.Println("AN ERROR OCCURRED WHILE READING INPUT")
 			comm = -1
 		}
 
 		switch comm {
 		case 0 | -1:
 		case 1:
-			var name string
-			fmt.Print("Insert the node name: ")
-			fmt.Scanf("%s", &name)
-			g.AddNode(name)
+			AddNode(&g)
 		case 2:
-			var a, b string
-			var weight int
-			fmt.Print("Insert the 2 node names separated by space: ")
-			fmt.Scanf("%s %s", &a, &b)
-			fmt.Print("Insert the weight: ")
-			fmt.Scanf("%d", &weight)
-			g.AddLine(a, b, weight)
+			AddLine(&g)
 		case 3:
-			var a, b string
-			fmt.Print("Insert the start and dest names separated by space: ")
-			fmt.Scanf("%s %s", &a, &b)
-			fmt.Printf("Distance: %d\n", g.BFS(a, b))
+			BFS(g)
 		case 4:
-			var a, b string
-			fmt.Print("Insert the start and dest names separated by space: ")
-			fmt.Scanf("%s %s", &a, &b)
-			cost, path := g.Dijkstra(a, b)
-			fmt.Printf("Path: %s\nCost: %d\n\n", path, cost)
+			Dijkstra(g)
 		}
 	}
+}
+
+func AddNode(g *graphs.Graph) {
+	var name string
+	fmt.Print("Insert the node name: ")
+	_, err := fmt.Scanf("%s", &name)
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+	g.AddNode(name)
+}
+
+func AddLine(g *graphs.Graph) {
+	var a, b string
+	var weight int
+
+	fmt.Print("Insert the 2 node names separated by space: ")
+	_, err := fmt.Scanf("%s %s", &a, &b)
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+
+	fmt.Print("Insert the weight: ")
+	_, err = fmt.Scanf("%d", &weight)
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+
+	g.AddLine(a, b, weight)
+}
+
+func BFS(g graphs.Graph) {
+	var a, b string
+
+	fmt.Print("Insert the start and dest names separated by space: ")
+	_, err := fmt.Scanf("%s %s", &a, &b)
+
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+
+	fmt.Printf("Distance: %d\n", g.BFS(a, b))
+}
+
+func Dijkstra(g graphs.Graph) {
+	var a, b string
+
+	fmt.Print("Insert the start and dest names separated by space: ")
+	_, err := fmt.Scanf("%s %s", &a, &b)
+
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+
+	cost, path := g.Dijkstra(a, b)
+	fmt.Printf("Path: %s\nCost: %d\n\n", path, cost)
 }
