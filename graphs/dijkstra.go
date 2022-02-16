@@ -12,7 +12,7 @@ func (g Graph) Dijkstra(a, b string) (int, string) {
 	type data struct {
 		steps int
 		node  Node
-		path string
+		path  string
 	}
 
 	vertexs := make([]data, len(g.V))
@@ -28,7 +28,7 @@ func (g Graph) Dijkstra(a, b string) (int, string) {
 		return r
 	}
 
-	border := queue.New()
+	border := queue.NewPriority()
 
 	for i := 0; i < l; i++ {
 		vertexs[i] = data{steps: math.MaxInt, node: g.V[i], path: g.V[i].Name}
@@ -40,7 +40,7 @@ func (g Graph) Dijkstra(a, b string) (int, string) {
 		vertexs[in].steps = 0
 	}
 
-	border.Enqueue(a)
+	border.Enqueue(a, 0)
 
 	for border.Len() > 0 {
 		el := strToPos(border.Dequeue().(string))
@@ -50,7 +50,9 @@ func (g Graph) Dijkstra(a, b string) (int, string) {
 				vertexs[pn].steps = vertexs[el].steps + near.Peso
 				vertexs[pn].path = vertexs[el].path + " -> " + vertexs[pn].node.Name
 				if !border.Contains(vertexs[pn].node.Name) {
-					border.Enqueue(vertexs[pn].node.Name)
+					border.Enqueue(vertexs[pn].node.Name, vertexs[pn].steps)
+				} else {
+					border.UpdatePriority(vertexs[pn].node.Name, vertexs[pn].steps)
 				}
 			}
 		}
