@@ -4,7 +4,7 @@ import "github.com/MrTip0/graph/containers"
 
 func (g Graph) BFS(a, b string) int {
 	edge, edgen := containers.NewQueue(), containers.NewQueue()
-	visited := make([]string, 0)
+	visited := containers.NewSet()
 
 	d := 1
 
@@ -19,12 +19,12 @@ func (g Graph) BFS(a, b string) int {
 			if ele.Dest == b {
 				return d
 			}
-			if !contains(ele.Dest, visited) && !edgen.Contains(ele.Dest) {
+			if !visited.Exists(ele.Dest) && !edgen.Contains(ele.Dest) {
 				edgen.Enqueue(ele.Dest)
 			}
 		}
 
-		visited = append(visited, f.Name)
+		visited.Add(f.Name)
 
 		if edge.Len() == 0 {
 			d++
