@@ -16,7 +16,8 @@ func main() {
 		fmt.Println("1 - Add Node")
 		fmt.Println("2 - Add Line")
 		fmt.Println("3 - BFS")
-		fmt.Println("4 - Dijkstra")
+		fmt.Println("4 - DFS")
+		fmt.Println("5 - Dijkstra")
 		fmt.Println()
 
 		var com string
@@ -40,6 +41,8 @@ func main() {
 		case 3:
 			BFS(g)
 		case 4:
+			DFS(g)
+		case 5:
 			Dijkstra(g)
 		}
 	}
@@ -104,4 +107,18 @@ func Dijkstra(g graphs.Graph) {
 
 	cost, path := g.Dijkstra(a, b)
 	fmt.Printf("Path: %s\nCost: %d\n\n", path, cost)
+}
+
+func DFS(g graphs.Graph) {
+	var a string
+
+	fmt.Print("Insert the start node name: ")
+	_, err := fmt.Scanf("%s", &a)
+
+	if err != nil {
+		fmt.Printf("an error occured while reading input")
+		return
+	}
+
+	fmt.Printf("Not connected nodes: %s\n", g.DFS(a))
 }
