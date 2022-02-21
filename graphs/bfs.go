@@ -1,17 +1,17 @@
 package graphs
 
-import "github.com/MrTip0/graph/queue"
+import "github.com/MrTip0/graph/containers"
 
 func (g Graph) BFS(a, b string) int {
-	border, bordern := queue.New(), queue.New()
+	edge, edgen := queue.New(), queue.New()
 	visited := make([]string, 0)
 
 	d := 1
 
-	border.Enqueue(a)
+	edge.Enqueue(a)
 
-	for border.Len() > 0 {
-		n := border.Dequeue()
+	for edge.Len() > 0 {
+		n := edge.Dequeue()
 
 		f := g.getByName(n.(string))
 
@@ -19,17 +19,17 @@ func (g Graph) BFS(a, b string) int {
 			if ele.Dest == b {
 				return d
 			}
-			if !contains(ele.Dest, visited) && !bordern.Contains(ele.Dest) {
-				bordern.Enqueue(ele.Dest)
+			if !contains(ele.Dest, visited) && !edgen.Contains(ele.Dest) {
+				edgen.Enqueue(ele.Dest)
 			}
 		}
 
 		visited = append(visited, f.Name)
 
-		if border.Len() == 0 {
+		if edge.Len() == 0 {
 			d++
-			border = bordern
-			bordern = queue.New()
+			edge = edgen
+			edgen = queue.New()
 		}
 	}
 	return -1
