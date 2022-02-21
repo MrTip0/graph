@@ -51,16 +51,3 @@ func (g *Graph) getByName(n string) *Node {
 	}
 	return nil
 }
-
-func contains(val string, l []string) bool {
-	r := false
-
-	for _, ele := range l {
-		if ele == val {
-			r = true
-			break
-		}
-	}
-
-	return r
-}
