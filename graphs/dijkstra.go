@@ -28,7 +28,7 @@ func (g Graph) Dijkstra(a, b string) (int, string) {
 		return r
 	}
 
-	edge := queue.NewPriority()
+	edge := containers.NewPriorityQueue()
 
 	for i := 0; i < l; i++ {
 		vertexs[i] = data{steps: math.MaxInt, node: g.V[i], path: g.V[i].Name}

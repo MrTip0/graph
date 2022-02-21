@@ -48,7 +48,7 @@ type PriorityQueue struct {
 	queue priorityQueue
 }
 
-func NewPriority() PriorityQueue {
+func NewPriorityQueue() PriorityQueue {
 	pr := make(priorityQueue, 0)
 	qu := PriorityQueue{queue: pr}
 	heap.Init(&pr)

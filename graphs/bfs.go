@@ -3,7 +3,7 @@ package graphs
 import "github.com/MrTip0/graph/containers"
 
 func (g Graph) BFS(a, b string) int {
-	edge, edgen := queue.New(), queue.New()
+	edge, edgen := containers.NewQueue(), containers.NewQueue()
 	visited := make([]string, 0)
 
 	d := 1
@@ -29,7 +29,7 @@ func (g Graph) BFS(a, b string) int {
 		if edge.Len() == 0 {
 			d++
 			edge = edgen
-			edgen = queue.New()
+			edgen = containers.NewQueue()
 		}
 	}
 	return -1
