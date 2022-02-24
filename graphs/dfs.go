@@ -8,7 +8,7 @@ import (
 
 func (g Graph)DFS(begin string) string {
 	visited := containers.NewSet()
-	edge, nedge := containers.NewStack(), containers.NewStack()
+	edge := containers.NewStack()
 
 	edge.Push(begin)
 
@@ -18,17 +18,12 @@ func (g Graph)DFS(begin string) string {
 		f := g.getByName(n.(string))
 
 		for _, ele := range f.Nears {
-			if !visited.Exists(ele.Dest) && !nedge.Contains(ele.Dest) {
-				nedge.Push(ele.Dest)
+			if !visited.Exists(ele.Dest) && !edge.Contains(ele.Dest) {
+				edge.Push(ele.Dest)
 			}
 		}
 
 		visited.Add(n.(string))
-
-		if edge.Len() == 0 {
-			edge = nedge
-			nedge = containers.NewStack()
-		}
 	}
 
 	r := ""

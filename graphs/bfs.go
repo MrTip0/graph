@@ -19,7 +19,7 @@ func (g Graph) BFS(a, b string) int {
 			if ele.Dest == b {
 				return d
 			}
-			if !visited.Exists(ele.Dest) && !edgen.Contains(ele.Dest) {
+			if !visited.Exists(ele.Dest) && !edgen.Contains(ele.Dest) && !edge.Contains(ele.Dest) {
 				edgen.Enqueue(ele.Dest)
 			}
 		}
