@@ -26,6 +26,15 @@ func (s *Stack) Pop() interface{} {
 	return nil
 }
 
+func (s *Stack) First() interface{} {
+	if s.v.Len() > 0 {
+		ele := s.v.Back()
+		val := ele.Value
+		return val
+	}
+	return nil
+}
+
 func (s *Stack) Len() int {
 	return s.v.Len()
 }
